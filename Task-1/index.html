@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editable Table</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+  </head>
+  <body>
+    <h1>Editable Table</h1>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function EditableTable() {
+        const initialData = [
+          ["Design Website Layout"],
+          ["Create User Registration Form"],
+          ["Implement Authentication System"],
+          ["Set Up Database Schema"],
+          ["Create RESTful API Endpoints"],
+          ["MERN Stack Setup"],
+          ["Integrate Payment Gateway"],
+          ["Develop Admin Panel"],
+          ["Write Unit Tests"],
+          ["Implement Responsive Design"],
+          ["Optimize Website Performance"],
+          ["Conduct User Testing"]
+        ];
+
+        const [data, setData] = useState(initialData);
+
+        const handleEdit = (rowIndex, value) => {
+          const updatedData = [...data];
+          updatedData[rowIndex][0] = value;
+          setData(updatedData);
+        };
+
+        const handleSave = () => {
+          console.log("Data ready to POST:", data);
+          alert("Data saved! Check the console for details.");
+        };
+
+        return (
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Task</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row, rowIndex) => (
+                  <tr key={rowIndex}>
+                    <td>
+                      <input
+                        type="text"
+                        value={row[0]}
+                        onChange={(e) => handleEdit(rowIndex, e.target.value)}
+                      />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <button onClick={handleSave}>Save Data</button>
+          </div>
+        );
+      }
+
+      ReactDOM.render(<EditableTable />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
